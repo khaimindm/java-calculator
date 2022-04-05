@@ -20,4 +20,9 @@ public class ValidationCheck {
         }
         return expression;
     }
+    
+    public boolean checkCorrectness(String expression) {
+        if (Parsing.isOperator(expression.charAt(0)) || Parsing.isOperator(expression.charAt(expression.length - 1))) {
+            throw new ;
+        }
 }
