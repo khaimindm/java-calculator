@@ -24,7 +24,7 @@ public class Parsing {
         }
     }
 
-    public static double parseExpression(String expression) {
+    public static String parseExpression(String expression) {
         LinkedList<Double> numbers = new LinkedList<Double>();
         LinkedList<Character> operator = new LinkedList<Character>();
         String expressionRPN = "";
@@ -36,8 +36,16 @@ public class Parsing {
             }
 
             if (isOperator(c)) {
-                while (!operator.isEmpty() && )
-            }
+                while (!operator.isEmpty() && priority(operator.getLast()) >= priority(c)) {
+                expressionRPN += operator.removeLast();
+                }
+                operator.add(c);
+            } else {
+                while (i < expression.length() && Character.isDigit(expression.charAt(i)) || expression.charAt(i) == '.') {
+                expressionRPN += expression.charAt(i);
+                }
+            }            
         }
+        return expressionRPN;
     }
 }
