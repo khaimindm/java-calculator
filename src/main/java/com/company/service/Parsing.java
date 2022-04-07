@@ -41,11 +41,15 @@ public class Parsing {
                 }
                 operator.add(c);
             } else {
+                String temp = "";
                 while (i < expression.length() && Character.isDigit(expression.charAt(i)) || expression.charAt(i) == '.') {
-                expressionRPN += expression.charAt(i);
+                temp += expression.charAt(i++);
                 }
+                --i;
+                expressionRPN += temp;
             }            
         }
+        System.out.println(expressionRPN);
         return expressionRPN;
     }
 }
