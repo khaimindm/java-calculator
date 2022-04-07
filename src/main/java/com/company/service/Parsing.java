@@ -25,7 +25,7 @@ public class Parsing {
     }
 
     public static String parseExpression(String expression) {
-        LinkedList<Double> numbers = new LinkedList<Double>();
+        //LinkedList<Double> numbers = new LinkedList<Double>();
         LinkedList<Character> operator = new LinkedList<Character>();
         String expressionRPN = "";
 
