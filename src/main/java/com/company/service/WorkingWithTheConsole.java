@@ -8,4 +8,14 @@ public class WorkingWithTheConsole {
         String inputExpression = in.nextLine();
         return inputExpression;
     }
+    
+    public void print(Double number) {
+        int intTypeNumber;
+        if (number % 1 == 0) {
+            intTypeNumber = (int)number;
+            System.out.println(intTypeNumber);
+        } else {
+            System.out.println(number);
+        }        
+    }
 }
