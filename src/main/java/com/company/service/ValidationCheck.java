@@ -4,14 +4,14 @@ import com.company.exception.NotCorrectCharacterInExpressionException;
 import com.company.exception.NotCorrectExpressionException;
 
 public class ValidationCheck {
-    private WorkingWithTheConsole workingWithTheConsole;
+    //private WorkingWithTheConsole workingWithTheConsole;
 
-    public ValidationCheck(WorkingWithTheConsole workingWithTheConsole) {
-        this.workingWithTheConsole = workingWithTheConsole;
-    }
+    //public ValidationCheck(WorkingWithTheConsole workingWithTheConsole) {
+        //this.workingWithTheConsole = workingWithTheConsole;
+    //}
 
-    public String checkValidity() throws NotCorrectCharacterInExpressionException {
-        String expression = workingWithTheConsole.getExpression();
+    public boolean checkValidity(String expression) throws NotCorrectCharacterInExpressionException {
+        //String expression = workingWithTheConsole.getExpression();
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
             if (!Character.isDigit(c) || c == ' ' || c == '+' || c == '-' || c == '*' || c == '/' || c == '.') {
@@ -19,7 +19,7 @@ public class ValidationCheck {
                         "Допустимые символы: '0-9', '+', '-', '*', '/', '.'. Введите корректное выражение.");
             }
         }
-        return expression;
+        return true;
     }
 
     public boolean checkCorrectness(String expression) throws NotCorrectExpressionException {
