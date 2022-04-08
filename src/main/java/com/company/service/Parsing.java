@@ -44,10 +44,16 @@ public class Parsing {
                 String temp = "";
                 while (i < expression.length() && Character.isDigit(expression.charAt(i)) || expression.charAt(i) == '.') {
                 temp += expression.charAt(i++);
+                    if(i >= expression.length()) {
+                    break;
+                    }
                 }
                 --i;
                 expressionRPN += temp;
             }            
+        }
+        while(!operator.isEmpty()) {
+            expressionRPN += operator.removeLast();
         }
         System.out.println(expressionRPN);
         return expressionRPN;
