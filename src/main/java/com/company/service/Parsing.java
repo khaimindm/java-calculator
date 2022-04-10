@@ -1,5 +1,7 @@
 package com.company.service;
 
+import com.company.exception.NotCorrectOperationException;
+
 import java.util.LinkedList;
 
 public class Parsing {
@@ -24,10 +26,31 @@ public class Parsing {
         }
     }
 
-    public static String parseExpression(String expression) {
-        //LinkedList<Double> numbers = new LinkedList<Double>();
+    static void calculate(LinkedList<Double> numbers, char currentCharacter) throws NotCorrectOperationException {
+        double r = numbers.removeLast();
+        double l = numbers.removeLast();
+        switch (currentCharacter) {
+            case '+':
+                numbers.add(l + r);
+                break;
+            case '-':
+                numbers.add(l - r);
+                break;
+            case '*':
+                numbers.add(l * r);
+                break;
+            case '/':
+                if (r == 0) {
+                    throw new NotCorrectOperationException("Недопустимая операция.");
+                }
+                numbers.add(l / r);
+                break;
+        }
+    }
+
+    public static Double parseExpression(String expression) throws NotCorrectOperationException {
+        LinkedList<Double> numbers = new LinkedList<Double>();
         LinkedList<Character> operator = new LinkedList<Character>();
-        String expressionRPN = "";
 
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
@@ -37,25 +60,24 @@ public class Parsing {
 
             if (isOperator(c)) {
                 while (!operator.isEmpty() && priority(operator.getLast()) >= priority(c)) {
-                expressionRPN += operator.removeLast();
+                    calculate(numbers, operator.removeLast());
                 }
                 operator.add(c);
             } else {
-                String temp = "";
+                String operand = "";
                 while (i < expression.length() && Character.isDigit(expression.charAt(i)) || expression.charAt(i) == '.') {
-                temp += expression.charAt(i++);
-                    if(i >= expression.length()) {
-                    break;
+                    operand += expression.charAt(i++);
+                    if (i >= expression.length()) {
+                        break;
                     }
                 }
                 --i;
-                expressionRPN += temp;
-            }            
+                numbers.add(Double.parseDouble(operand));
+            }
         }
-        while(!operator.isEmpty()) {
-            expressionRPN += operator.removeLast();
+        while (!operator.isEmpty()) {
+            calculate(numbers, operator.removeLast());
         }
-        System.out.println(expressionRPN);
-        return expressionRPN;
+        return numbers.get(0);
     }
 }

@@ -14,7 +14,6 @@ public class WorkingWithTheConsole {
         double d = new Double(number);
         int intTypeNumber;
         if (number % 1 == 0) {
-            //intTypeNumber = (int)number;
             intTypeNumber = (int)d;
             System.out.println(intTypeNumber);
         } else {
